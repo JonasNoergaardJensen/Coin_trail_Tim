@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,6 +7,9 @@ public class TileMovement : MonoBehaviour
 {
     public float moveSpeed = 5f; // Speed at which to move between tiles
     public Tilemap walls;
+    public Tilemap items;
+    public TMP_Text coinCount;
+    int coins = 1;
 
     private bool isMoving = false; // Is the object currently moving
     private Vector3Int currentTile; // Current tile position in tilemap coordinates
@@ -38,7 +42,33 @@ public class TileMovement : MonoBehaviour
         if (transform.position == targetPosition)
         {
             isMoving = false;
+            PickUpCoins();
+            DropCoin();
         }
+    }
+
+    private void PickUpCoins()
+    {
+        throw new NotImplementedException();
+    }
+
+    void DropCoin()
+    {
+        if (coins > 0)
+        {
+            coins--;
+            UpdateUI();
+        } else Die();
+    }
+
+    private void Die()
+    {
+        throw new NotImplementedException();
+    }
+
+    void UpdateUI()
+    {
+        coinCount.text = coins.ToString();
     }
 
     private void HandleInput()
