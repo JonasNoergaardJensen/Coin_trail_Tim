@@ -488,6 +488,7 @@ MonoBehaviour:
   walls: {fileID: 1125716145}
   items: {fileID: 257724510}
   coinCount: {fileID: 127487205}
+  coinTile: {fileID: 11400000, guid: 72fd9fc973349b64b82a9bbaa4907e2d, type: 2}
 --- !u!212 &510758742
 SpriteRenderer:
   m_ObjectHideFlags: 0

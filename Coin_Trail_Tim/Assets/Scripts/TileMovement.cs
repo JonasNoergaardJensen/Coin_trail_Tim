@@ -9,6 +9,7 @@ public class TileMovement : MonoBehaviour
     public Tilemap walls;
     public Tilemap items;
     public TMP_Text coinCount;
+    public ItemTile coinTile;
     int coins = 1;
 
     private bool isMoving = false; // Is the object currently moving
@@ -42,20 +43,31 @@ public class TileMovement : MonoBehaviour
         if (transform.position == targetPosition)
         {
             isMoving = false;
-            PickUpCoins();
+            PickUpItems();
             DropCoin();
         }
     }
 
-    private void PickUpCoins()
+    private void PickUpItems()
     {
-        throw new NotImplementedException();
+        ItemTile item = items.GetTile<ItemTile>(currentTile);
+        if (item == null) return;
+        switch (item.itemType) 
+        { 
+            case ItemTile.ItemType.Coin:
+                coins += item.amount;
+                items.SetTile(currentTile, null);
+                break;
+        }
+
+        UpdateUI();
     }
 
     void DropCoin()
     {
         if (coins > 0)
         {
+            items.SetTile(currentTile, coinTile);
             coins--;
             UpdateUI();
         } else Die();
